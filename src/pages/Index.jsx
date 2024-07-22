@@ -60,17 +60,17 @@ const Index = () => {
   const renderStories = (storiesToRender) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {storiesToRender.map(story => (
-        <Card key={story.id} className="w-full">
+        <Card key={story.id} className="w-full bg-white">
           <CardHeader>
-            <CardTitle>{story.title}</CardTitle>
+            <CardTitle className="text-blue-800">{story.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Upvotes: {story.score}</p>
+            <p className="text-blue-600">Upvotes: {story.score}</p>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Dialog>
               <DialogTrigger asChild>
-                <Button onClick={() => setSelectedStory(story)}>Read More</Button>
+                <Button onClick={() => setSelectedStory(story)} className="bg-blue-500 hover:bg-blue-600">Read More</Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh]">
                 <DialogHeader>
@@ -91,7 +91,7 @@ const Index = () => {
             <Button
               variant="ghost"
               onClick={() => toggleFavorite(story)}
-              className={favorites.some(fav => fav.id === story.id) ? "text-red-500" : ""}
+              className={favorites.some(fav => fav.id === story.id) ? "text-red-500" : "text-blue-500"}
             >
               <Heart className="w-5 h-5" />
             </Button>
@@ -102,47 +102,49 @@ const Index = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Top 100 Hacker News Stories</h1>
-      <Input
-        type="text"
-        placeholder="Search stories..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4"
-      />
-      <Tabs defaultValue="all" className="mb-4">
-        <TabsList>
-          <TabsTrigger value="all">All Stories</TabsTrigger>
-          <TabsTrigger value="favorites">Favorites</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all">
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[...Array(12)].map((_, index) => (
-                <Card key={index} className="w-full">
-                  <CardHeader>
-                    <Skeleton className="h-4 w-3/4" />
-                  </CardHeader>
-                  <CardContent>
-                    <Skeleton className="h-4 w-1/2" />
-                  </CardContent>
-                  <CardFooter>
-                    <Skeleton className="h-4 w-1/4" />
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            renderStories(filteredStories)
-          )}
-        </TabsContent>
-        <TabsContent value="favorites">
-          {renderStories(favorites.filter(story =>
-            story.title.toLowerCase().includes(searchTerm.toLowerCase())
-          ))}
-        </TabsContent>
-      </Tabs>
+    <div className="min-h-screen bg-blue-100 p-4">
+      <div className="container mx-auto bg-blue-200 p-6 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-4 text-blue-800">Top 100 Hacker News Stories</h1>
+        <Input
+          type="text"
+          placeholder="Search stories..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="mb-4"
+        />
+        <Tabs defaultValue="all" className="mb-4">
+          <TabsList className="bg-blue-300">
+            <TabsTrigger value="all" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">All Stories</TabsTrigger>
+            <TabsTrigger value="favorites" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">Favorites</TabsTrigger>
+          </TabsList>
+          <TabsContent value="all">
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[...Array(12)].map((_, index) => (
+                  <Card key={index} className="w-full bg-white">
+                    <CardHeader>
+                      <Skeleton className="h-4 w-3/4" />
+                    </CardHeader>
+                    <CardContent>
+                      <Skeleton className="h-4 w-1/2" />
+                    </CardContent>
+                    <CardFooter>
+                      <Skeleton className="h-4 w-1/4" />
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              renderStories(filteredStories)
+            )}
+          </TabsContent>
+          <TabsContent value="favorites">
+            {renderStories(favorites.filter(story =>
+              story.title.toLowerCase().includes(searchTerm.toLowerCase())
+            ))}
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
