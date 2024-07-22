@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart } from "lucide-react";
+import { Heart, Github, Twitter } from "lucide-react";
 
 const Index = () => {
   const [stories, setStories] = useState([]);
@@ -102,8 +102,8 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-blue-100 p-4">
-      <div className="container mx-auto bg-blue-200 p-6 rounded-lg shadow-lg">
+    <div className="min-h-screen bg-blue-100 flex flex-col">
+      <div className="container mx-auto bg-blue-200 p-6 rounded-lg shadow-lg flex-grow">
         <h1 className="text-3xl font-bold mb-4 text-blue-800">Top 100 Hacker News Stories</h1>
         <Input
           type="text"
@@ -145,6 +145,27 @@ const Index = () => {
           </TabsContent>
         </Tabs>
       </div>
+      <footer className="bg-blue-800 text-white py-8 mt-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <h2 className="text-2xl font-bold">Hacker News Reader</h2>
+              <p className="mt-2">Stay updated with the latest tech news</p>
+            </div>
+            <div className="flex space-x-4">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300">
+                <Github className="w-6 h-6" />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300">
+                <Twitter className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+          <div className="mt-8 text-center">
+            <p>&copy; {new Date().getFullYear()} Hacker News Reader. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
