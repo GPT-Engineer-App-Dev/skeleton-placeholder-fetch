@@ -62,15 +62,15 @@ const Index = () => {
       {storiesToRender.map(story => (
         <Card key={story.id} className="w-full bg-white">
           <CardHeader>
-            <CardTitle className="text-red-800">{story.title}</CardTitle>
+            <CardTitle className="text-yellow-800">{story.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-red-600">Upvotes: {story.score}</p>
+            <p className="text-yellow-600">Upvotes: {story.score}</p>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Dialog>
               <DialogTrigger asChild>
-                <Button onClick={() => setSelectedStory(story)} className="bg-red-500 hover:bg-red-600 text-white">Read More</Button>
+                <Button onClick={() => setSelectedStory(story)} className="bg-yellow-500 hover:bg-yellow-600 text-black">Read More</Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh]">
                 <DialogHeader>
@@ -91,7 +91,7 @@ const Index = () => {
             <Button
               variant="ghost"
               onClick={() => toggleFavorite(story)}
-              className={favorites.some(fav => fav.id === story.id) ? "text-red-500" : "text-gray-500"}
+              className={favorites.some(fav => fav.id === story.id) ? "text-yellow-500" : "text-gray-500"}
             >
               <Heart className="w-5 h-5" />
             </Button>
@@ -102,9 +102,9 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-red-100 flex flex-col">
-      <div className="container mx-auto bg-red-200 p-6 rounded-lg shadow-lg flex-grow my-8">
-        <h1 className="text-3xl font-bold mb-4 text-red-800">Top 100 Hacker News Stories</h1>
+    <div className="min-h-screen bg-yellow-100 flex flex-col">
+      <div className="container mx-auto bg-yellow-200 p-6 rounded-lg shadow-lg flex-grow my-8">
+        <h1 className="text-3xl font-bold mb-4 text-yellow-800">Top 100 Hacker News Stories</h1>
         <Input
           type="text"
           placeholder="Search stories..."
@@ -113,9 +113,9 @@ const Index = () => {
           className="mb-4"
         />
         <Tabs defaultValue="all" className="mb-4">
-          <TabsList className="bg-red-300">
-            <TabsTrigger value="all" className="data-[state=active]:bg-red-500 data-[state=active]:text-white">All Stories</TabsTrigger>
-            <TabsTrigger value="favorites" className="data-[state=active]:bg-red-500 data-[state=active]:text-white">Favorites</TabsTrigger>
+          <TabsList className="bg-yellow-300">
+            <TabsTrigger value="all" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black">All Stories</TabsTrigger>
+            <TabsTrigger value="favorites" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black">Favorites</TabsTrigger>
           </TabsList>
           <TabsContent value="all">
             {loading ? (
@@ -145,7 +145,7 @@ const Index = () => {
           </TabsContent>
         </Tabs>
       </div>
-      <footer className="bg-red-800 text-white py-8">
+      <footer className="bg-yellow-800 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
@@ -153,10 +153,10 @@ const Index = () => {
               <p className="mt-2">Stay updated with the latest tech news</p>
             </div>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-300">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-300">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300">
                 <Twitter className="w-6 h-6" />
               </a>
             </div>
