@@ -59,18 +59,23 @@ const Index = () => {
 
   const renderStories = (storiesToRender) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {storiesToRender.map(story => (
-        <Card key={story.id} className="w-full bg-white">
-          <CardHeader>
-            <CardTitle className="text-yellow-800">{story.title}</CardTitle>
+      {storiesToRender.map((story, index) => (
+        <Card key={story.id} className="w-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <CardHeader className={`bg-gradient-to-r ${index % 6 === 0 ? 'from-red-200 to-orange-200' : 
+                                                     index % 6 === 1 ? 'from-yellow-200 to-green-200' :
+                                                     index % 6 === 2 ? 'from-green-200 to-blue-200' :
+                                                     index % 6 === 3 ? 'from-blue-200 to-indigo-200' :
+                                                     index % 6 === 4 ? 'from-indigo-200 to-purple-200' :
+                                                     'from-purple-200 to-pink-200'}`}>
+            <CardTitle className="text-gray-800">{story.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-yellow-600">Upvotes: {story.score}</p>
+            <p className="text-gray-600">Upvotes: {story.score}</p>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Dialog>
               <DialogTrigger asChild>
-                <Button onClick={() => setSelectedStory(story)} className="bg-yellow-500 hover:bg-yellow-600 text-black">Read More</Button>
+                <Button onClick={() => setSelectedStory(story)} className="bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white">Read More</Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh]">
                 <DialogHeader>
@@ -91,7 +96,7 @@ const Index = () => {
             <Button
               variant="ghost"
               onClick={() => toggleFavorite(story)}
-              className={favorites.some(fav => fav.id === story.id) ? "text-yellow-500" : "text-gray-500"}
+              className={favorites.some(fav => fav.id === story.id) ? "text-red-500" : "text-gray-500"}
             >
               <Heart className="w-5 h-5" />
             </Button>
@@ -102,9 +107,9 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-yellow-100 flex flex-col">
-      <div className="container mx-auto bg-yellow-200 p-6 rounded-lg shadow-lg flex-grow my-8">
-        <h1 className="text-3xl font-bold mb-4 text-yellow-800">Top 100 Hacker News Stories</h1>
+    <div className="min-h-screen bg-gradient-to-b from-red-100 via-yellow-100 to-blue-100 flex flex-col">
+      <div className="container mx-auto bg-white bg-opacity-80 p-6 rounded-lg shadow-lg flex-grow my-8">
+        <h1 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Top 100 Hacker News Stories</h1>
         <Input
           type="text"
           placeholder="Search stories..."
@@ -113,9 +118,9 @@ const Index = () => {
           className="mb-4"
         />
         <Tabs defaultValue="all" className="mb-4">
-          <TabsList className="bg-yellow-300">
-            <TabsTrigger value="all" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black">All Stories</TabsTrigger>
-            <TabsTrigger value="favorites" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black">Favorites</TabsTrigger>
+          <TabsList className="bg-gradient-to-r from-indigo-200 to-purple-200">
+            <TabsTrigger value="all" className="data-[state=active]:bg-white data-[state=active]:text-purple-600">All Stories</TabsTrigger>
+            <TabsTrigger value="favorites" className="data-[state=active]:bg-white data-[state=active]:text-purple-600">Favorites</TabsTrigger>
           </TabsList>
           <TabsContent value="all">
             {loading ? (
@@ -145,7 +150,7 @@ const Index = () => {
           </TabsContent>
         </Tabs>
       </div>
-      <footer className="bg-yellow-800 text-white py-8">
+      <footer className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
@@ -153,10 +158,10 @@ const Index = () => {
               <p className="mt-2">Stay updated with the latest tech news</p>
             </div>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-300">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-300">
                 <Twitter className="w-6 h-6" />
               </a>
             </div>
