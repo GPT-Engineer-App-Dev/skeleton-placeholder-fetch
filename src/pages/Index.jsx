@@ -3,11 +3,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Index = () => {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedStory, setSelectedStory] = useState(null);
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -73,9 +75,26 @@ const Index = () => {
                 <p>Upvotes: {story.score}</p>
               </CardContent>
               <CardFooter>
-                <Button asChild>
-                  <a href={story.url} target="_blank" rel="noopener noreferrer">Read More</a>
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button onClick={() => setSelectedStory(story)}>Read More</Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh]">
+                    <DialogHeader>
+                      <DialogTitle>{selectedStory?.title}</DialogTitle>
+                    </DialogHeader>
+                    <div className="w-full h-[calc(90vh-100px)]">
+                      {selectedStory && (
+                        <iframe
+                          src={selectedStory.url}
+                          title={selectedStory.title}
+                          className="w-full h-full border-0"
+                          sandbox="allow-scripts allow-same-origin"
+                        />
+                      )}
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </CardFooter>
             </Card>
           ))}
